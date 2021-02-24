@@ -17,27 +17,32 @@ let quotes = [
   { quote: '"The greatest glory in living lies not in never falling, but in rising every time we fall."', 
     source: 'Nelson Mandela',
     citation: 'White House Reception',
-    year: 1998
+    year: 1998,
+    tag: '#gettingbackup'
   },
   { quote: '"Injustice anywhere is a threat to justice everywhere."', 
     source: 'Martin Luther King Jr.',
     citation: 'Letter from Birmingham Jail',
-    year: 1963
+    year: 1963,
+    tag: '#justice'
   },
   { quote: '"Try not to become a man of success. Rather become a man of value."', 
     source: 'Albert Einstein',
     citation: 'LIFE Magazine',
-    year: 1955
+    year: 1955,
+    tag: '#manofvalue'
   },
   { quote: '"Do All the Good You Can; In All the Ways You Can"', 
     source: 'John Wesley',
     citation: 'The Law Established through Faith',
-    year: 1799
+    year: 1799,
+    tag: '#dogood'
   },
   { quote: '"The object of education is to teach us to love what is beautiful."', 
     source: 'Plato',
     citation: 'The Republic',
-    year: '375 BC'
+    year: '375 BC',
+    tag: '#educationgoal'
   }];
   console.log(JSON.stringify(quotes));
 
@@ -95,14 +100,22 @@ function printQuote() {
   if (randomQuote.year !== undefined) {
     initiate += `<span class = 'year'>${randomQuote.year}</span>`;
   }
+  //extra requirements - extra property: tag
+  if (randomQuote.tag !== undefined) {
+    initiate += `<br><span>${randomQuote.tag}</span>`;
+  }
+  //extra requirements - background color change
+  document.body.style.backgroundColor = `rgb(${Math.random()*255}, 193, ${Math.random()*255})`; 
+
   // 5. After the two if statements, concatenate the closing </p> 
   // tag to the HTML string
   initiate += '</p>';
   // 6. set the innerHTML of the quote-box div to equal the 
   // complete HTML string
+
   document.getElementById('quote-box').innerHTML = initiate; 
 }
-printQuote();
+
 
 /***
  * click event listener for the print quote button
@@ -110,3 +123,8 @@ printQuote();
 ***/
 
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
+
+//extra requirement - refresh page
+window.addEventListener ('load', function () {
+  setInterval (printQuote, 4000);
+}, false);
